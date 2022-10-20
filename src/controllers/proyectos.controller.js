@@ -34,8 +34,8 @@ export const actualizarProyecto = async(req, res) => {
      proyecto.nombre = nombre;
      proyecto.prioridad = prioridad;
      proyecto.descripcion = descripcion;
+     proyecto.save();
 
-     
 
 }
 
