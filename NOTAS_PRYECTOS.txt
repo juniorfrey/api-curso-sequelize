@@ -1,0 +1,15 @@
+Modulos:
+    express
+    morgan
+    sequelize
+    sequelise-cli
+    mysql2
+
+
+CLONAR EL PROYECTO
+https://github.com/juniorfrey/api-sequelize-practica.git
+
+git clone https://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:x-oauth-basic@github.com/juniorfrey/api-sequelize-practica.git
+
+
+git remote set-url origin https://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:x-oauth-basic@github.com/juniorfrey/api-sequelize-practica.git
