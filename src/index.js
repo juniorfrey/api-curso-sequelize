@@ -7,7 +7,7 @@ const main = async() => {
 
     // validar conexion
     try {
-        await sequelize.sync({ force: true });
+        await sequelize.sync({ force: false });
         app.listen(5000);
         console.log('Servidor corriendo');
       } catch (error) {
