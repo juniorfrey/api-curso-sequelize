@@ -28,15 +28,19 @@ export const crearProyecto = async(req, res) => {
 
 export const actualizarProyecto = async(req, res) => {
 
-     const { id } = req.params;
-     const { nombre, prioridad, descripcion } = req.body;
-     const proyecto = await Proyecto.findByPk(id);
-     proyecto.nombre = nombre;
-     proyecto.prioridad = prioridad;
-     proyecto.descripcion = descripcion;
-     proyecto.save();
-
-
+     try {
+        const { id } = req.params;
+        const { nombre, prioridad, descripcion } = req.body;
+        const proyecto = await Proyecto.findByPk(id);
+        proyecto.nombre = nombre;
+        proyecto.prioridad = prioridad;
+        proyecto.descripcion = descripcion;
+        await proyecto.save();
+        res.json(proyecto);
+     } catch (error) {
+        return res.status(500).json({ mensaje: error.message });
+     }
+     
 }
 
 export const eliminarProyecto = async(req, res) => {
@@ -54,4 +58,24 @@ export const eliminarProyecto = async(req, res) => {
     }
 
    
+}
+
+export const prouectoID = async(req, res) => {
+    try {
+        /* const { id } = req.params;
+        const proyecto = await Proyecto.findByPk(id);
+        res.json(proyecto); */
+        const { id } = req.params;
+        const proyecto = await Proyecto.findOne({
+            where: {id:id}
+        });
+
+        if(!proyecto)
+            return res.status(404).json({mensaje:"Proyecto no existe"});
+            
+        res.json(proyecto);
+    } catch (error) {
+        return res.status(500).json({ mensaje: error.message });
+    }
+     
 }
