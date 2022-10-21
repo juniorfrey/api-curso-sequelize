@@ -61,6 +61,7 @@ export const tareaId = async (req, res) => {
     const { id } = req.params;
     const tarea = await Tarea.findOne({
       where: { id: id },
+      include: [{ model: Proyecto }],
     });
 
     if (!tarea)
