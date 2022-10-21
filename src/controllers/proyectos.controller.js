@@ -1,4 +1,5 @@
 import { Proyecto } from "../models/Proyecto.js";
+import { Tarea } from "../models/Tareas.js";
 
 export const getProyectos = async(req, res) => {
 
@@ -62,9 +63,6 @@ export const eliminarProyecto = async(req, res) => {
 
 export const prouectoID = async(req, res) => {
     try {
-        /* const { id } = req.params;
-        const proyecto = await Proyecto.findByPk(id);
-        res.json(proyecto); */
         const { id } = req.params;
         const proyecto = await Proyecto.findOne({
             where: {id:id}
@@ -72,10 +70,22 @@ export const prouectoID = async(req, res) => {
 
         if(!proyecto)
             return res.status(404).json({mensaje:"Proyecto no existe"});
-            
+
         res.json(proyecto);
     } catch (error) {
         return res.status(500).json({ mensaje: error.message });
     }
      
 }
+
+export const getproyectoTareas = async(req, res) => {
+    try {
+         const { id } = req.params;
+         const tareas = await Tarea.findAll({
+            where:{ proyectoId:id }
+         });
+         res.json(tareas);
+    } catch (error) {
+        return res.status(500).json({ mensaje: error.message });
+    }
+};
