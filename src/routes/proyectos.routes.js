@@ -11,7 +11,7 @@ import {
 const router = Router();
 
 router.get("/proyectos", getProyectos);
-router.post("/proyectos", crearProyecto);
+router.post("/proyecto", crearProyecto);
 router.put("/proyectos/:id", actualizarProyecto);
 router.delete("/proyectos/:id", eliminarProyecto);
 router.get("/proyectos/:id", prouectoID);
