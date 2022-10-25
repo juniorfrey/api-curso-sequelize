@@ -3,6 +3,7 @@ import { sequelize } from "./database/database.js";
 import './models/Proyecto.js';
 import './models/Tareas.js';
 
+
 const main = async() => {
 
     // validar conexion

@@ -7,9 +7,9 @@ export const getProyectos = async(req, res) => {
 
     try {
 
-        Jwt.verify(req.token, "secretkey", async (error, authData) => {
+        Jwt.verify(req.token, process.env.KEYSECRET, async (error, authData) => {
           if (error) {
-            res.sendStatus(403);
+            res.status(403).json({ mensaje: error.message });
           } else {
             const proyectos = await Proyecto.findAll();
             res.json({ proyectos, authData, mensaje: "Post fue creado" });

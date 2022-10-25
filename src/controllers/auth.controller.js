@@ -1,5 +1,7 @@
 
 import Jwt from "jsonwebtoken";
+import { config } from "dotenv";
+config({ path: process.ENV });
 
 export const login = (req, res) => {
     const user = {
@@ -8,7 +10,7 @@ export const login = (req, res) => {
         email:"prueba@gmail.com"
     }
 
-    Jwt.sign({user},'secretkey', { expiresIn: '30s' }, (error, token) => {
+    Jwt.sign({user},process.env.KEYSECRET, { expiresIn: '30s' }, (error, token) => {
         res.json({
           token: token,
           mensaje: "Respondiendo desde login",
