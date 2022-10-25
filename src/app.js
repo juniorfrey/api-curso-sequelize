@@ -7,6 +7,7 @@ const app = express();
 
 app.use(express.json());
 
+//Rutas
 app.use(proyectosRutas);
 app.use(tareasRutas);
 app.use(auhRutas);
