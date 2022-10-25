@@ -1,11 +1,22 @@
+
+import Jwt from "jsonwebtoken";
 import { Proyecto } from "../models/Proyecto.js";
 import { Tarea } from "../models/Tareas.js";
 
 export const getProyectos = async(req, res) => {
 
     try {
-        const proyectos = await Proyecto.findAll();
-        res.json(proyectos);
+
+        Jwt.verify(req.token, "secretkey", async (error, authData) => {
+          if (error) {
+            res.sendStatus(403);
+          } else {
+            const proyectos = await Proyecto.findAll();
+            res.json({ proyectos, authData, mensaje: "Post fue creado" });
+          }
+        });
+
+        
     } catch (error) {
         return res.status(500).json({mensaje:error.message});
     }

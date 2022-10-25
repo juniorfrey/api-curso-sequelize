@@ -1,4 +1,5 @@
 import {Router} from 'express';
+import Jwt from "jsonwebtoken";
 import {
   crearProyecto,
   getProyectos,
@@ -7,10 +8,11 @@ import {
   prouectoID,
   getproyectoTareas,
 } from "../controllers/proyectos.controller.js";
+import {verifyToken} from "../controllers/auth.controller.js"
 
 const router = Router();
 
-router.get("/proyectos", getProyectos);
+router.get("/proyectos", verifyToken, getProyectos);
 router.post("/proyecto", crearProyecto);
 router.put("/proyectos/:id", actualizarProyecto);
 router.delete("/proyectos/:id", eliminarProyecto);
