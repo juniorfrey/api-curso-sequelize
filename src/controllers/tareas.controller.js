@@ -1,12 +1,20 @@
+import Jwt from "jsonwebtoken";
 import { Proyecto } from "../models/Proyecto.js";
 import { Tarea } from "../models/Tareas.js";
 
 export const getTareas = async(req, res) => {
     try {
-      const tareas = await Tarea.findAll({
-        include: [{ model: Proyecto }],
-      });
-      res.json(tareas);
+
+      Jwt.verify(req.token, process.env.KEYSECRET, async (error, authData) => {
+        if (error) {
+          res.status(403).json({ mensaje: error.message, token:"Necesita autenticarse" });
+        } else {
+          const tareas = await Tarea.findAll({
+            include: [{ model: Proyecto }],
+          });
+          res.json(tareas);
+        }
+    });
     } catch (error) {
       return res.status(500).json({ mensaje: error.message });
     }

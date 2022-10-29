@@ -7,10 +7,11 @@ import {
   eliminarTarea,
   tareaId,
 } from "../controllers/tareas.controller.js";
+import {verifyToken} from "../controllers/auth.controller.js"
 
 const router = Router();
 
-router.get("/tareas", getTareas);
+router.get("/tareas", verifyToken, getTareas);
 router.post("/tarea", crearTarea);
 router.put("/tarea/:id", actualizarTarea);
 router.delete("/tarea/:id", eliminarTarea);
