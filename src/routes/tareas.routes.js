@@ -12,9 +12,9 @@ import {verifyToken} from "../controllers/auth.controller.js"
 const router = Router();
 
 router.get("/tareas", verifyToken, getTareas);
-router.post("/tarea", crearTarea);
-router.put("/tarea/:id", actualizarTarea);
-router.delete("/tarea/:id", eliminarTarea);
-router.get("/tarea/:id", tareaId);
+router.post("/tarea", verifyToken, crearTarea);
+router.put("/tarea/:id", verifyToken, actualizarTarea);
+router.delete("/tarea/:id", verifyToken, eliminarTarea);
+router.get("/tarea/:id", verifyToken, tareaId);
 
 export default router;
