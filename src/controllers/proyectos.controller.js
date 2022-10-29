@@ -108,7 +108,7 @@ export const prouectoID = async(req, res) => {
                     return res.status(404).json({mensaje:"Proyecto no existe"});
 
                 res.json(proyecto);
-                        }
+            }
         });
 
         
