@@ -2,8 +2,15 @@
 import Jwt from "jsonwebtoken";
 import { config } from "dotenv";
 import Bcrypt from  "bcrypt";
+import path from 'path';
+import { fileURLToPath } from 'url';
+
 config({ path: process.ENV });
 
+
+const pathname = new URL('../../client', import.meta.url);
+const __filename = fileURLToPath(pathname);
+const __dirname = path.dirname(__filename);
 
 //modelos
 import { Auth } from "../models/Auth.js";
@@ -44,7 +51,7 @@ export const registro = async(req, res) => {
     });
 
     if(usuario)
-       return res.status(500).json({mensaje:"Este correo ya se encuentra en uso"});
+       return res.status(200).json({mensaje:"Este correo ya se encuentra en uso"});
 
     const encryptedPassword = await Bcrypt.hash(password, saltRounds);
     try {
@@ -54,7 +61,6 @@ export const registro = async(req, res) => {
         return res.status(500).json({ mensaje: error.message, error:"error" });
     }
 }
-
 
 export const verifyToken = (req, res, next) => {
 
@@ -71,4 +77,11 @@ export const verifyToken = (req, res, next) => {
     /* res.json({
         'mensaje':"Función para verificar token"
     }) */
+}
+
+// rutas frontend
+export const htmllOGIN = (req, res) =>{
+
+    res.sendFile(`${__filename}/modulos/autenticacion/index.html`);
+    //res.json({r:`../../modulos/autenticacion/index.html`})
 }
