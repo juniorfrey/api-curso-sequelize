@@ -22,7 +22,7 @@ io.on('connection', (socket) => {
 }) */
 
 app.use(express.json());
-
+app.use(express.static("client"));
 //Web Services
 webSocketPrueba(server);
 //Rutas
