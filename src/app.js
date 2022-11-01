@@ -11,10 +11,10 @@ const server = http.createServer(app)
 
 const io = new Server(server);
 io.on('connection', (socket) => {
-    console.log('Usuario conectado: ' + socket.id)
 
     socket.on('chat', (msg) => {
-        io.emit('chat', msg);
+        let mensaje = `${socket.id}: ${msg}`;
+        io.emit("chat", mensaje);
     })
 })
 
