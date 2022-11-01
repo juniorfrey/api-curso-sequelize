@@ -3,7 +3,7 @@ import { sequelize } from "./database/database.js";
 
 /* import './models/Proyecto.js';
 import './models/Tareas.js';
-import './models/Auth.js'; */
+import './models/Auth.js';  */
 import { config } from "dotenv";
 config({ path: process.ENV });
 

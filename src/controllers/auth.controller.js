@@ -34,7 +34,7 @@ export const login = async(req, res) => {
 
     //res.json({data:usuario, password:dcryptPassword })
 
-    Jwt.sign({user},process.env.KEYSECRET, { expiresIn: '1m' }, (error, token) => {
+    Jwt.sign({user},process.env.KEYSECRET, { expiresIn: '10m' }, (error, token) => {
         res.json({
           token: token,
           mensaje: "Respondiendo desde login",
