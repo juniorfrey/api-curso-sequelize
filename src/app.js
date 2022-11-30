@@ -1,16 +1,24 @@
 import express  from "express";
 import * as http from 'http'; //ES 6
+import cors from "cors";
 /* import { Server } from "socket.io"; */
 import proyectosRutas from "./routes/proyectos.routes.js";
 import tareasRutas from "./routes/tareas.routes.js";
 import auhRutas from "./routes/auth.routes.js";
+
 
 import {webSocketPrueba} from './webserver/webservice.js';
 
 
 
 const app = express();
-const server = http.createServer(app);
+const server = http.createServer(app, {
+    cors:{
+        origin:'*'
+    }
+});
+
+app.use(cors());
 
 /* const io = new Server(server);
 io.on('connection', (socket) => {

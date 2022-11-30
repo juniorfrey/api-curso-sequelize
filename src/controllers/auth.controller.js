@@ -20,15 +20,16 @@ const saltRounds = 10;
 export const login = async(req, res) => {
 
     const user = req.body;
+    const email = user.params.json;
 
     const usuario = await Auth.findOne({
-        where: {email:req.body.email}
+      where: { email: email.email},
     });
 
     if(!usuario)
        return res.status(404).json({mensaje:"Usuario no existe"});
 
-    const dcryptPassword = Bcrypt.compareSync(req.body.password, usuario.password);
+    const dcryptPassword = Bcrypt.compareSync(email.password.toString(), usuario.password);
     if(!dcryptPassword)
         return res.status(404).json({mensaje:"Contraseña invlida"});
 
@@ -38,6 +39,7 @@ export const login = async(req, res) => {
         res.json({
           token: token,
           mensaje: "Respondiendo desde login",
+          datas: { user: email.email },
         });
     });
 
